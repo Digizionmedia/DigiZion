@@ -179,63 +179,6 @@ a {
         width: 85%;
     }
 }
-/* ========================================
-   MOBILE MENU STYLES
-   ======================================== */
-
-/* Tablet and mobile screens (768px and below) */
-@media (max-width: 768px) {
-    
-    /* Show hamburger button on mobile */
-    .mobile-menu-toggle {
-        display: block;
-    }
-    
-    /* Hide desktop menu by default on mobile */
-    .nav-menu {
-        position: fixed;
-        top: 0;
-        right: -100%; /* Hidden off-screen by default */
-        width: 70%;
-        max-width: 300px;
-        height: 100vh;
-        background-color: #fff;
-        flex-direction: column;
-        padding: 80px 30px 30px 30px;
-        gap: 0;
-        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-        transition: right 0.3s ease;
-        overflow-y: auto;
-    }
-    
-    /* When menu is active (open) */
-    .nav-menu.active {
-        right: 0; /* Slide in from right */
-    }
-    
-    .nav-menu li {
-        width: 100%;
-        border-bottom: 1px solid #e5e7eb;
-    }
-    
-    .nav-menu a {
-        display: block;
-        padding: 18px 0;
-        font-size: 18px;
-    }
-    
-    /* Overlay backdrop when menu is open */
-    .nav-menu.active::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background: rgba(0,0,0,0.5);
-        z-index: -1;
-    }
-}
 
 
 /* ========================================
