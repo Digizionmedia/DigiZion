@@ -1,23 +1,19 @@
 // ========================================
-// MOBILE MENU TOGGLE
+// MOBILE MENU TOGGLE (UPDATED)
 // ========================================
 
-// Wait for the page to fully load before running code
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Get the mobile menu button
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    
-    // Get the navigation menu
     const navMenu = document.querySelector('.nav-menu');
     
-    // When someone clicks the hamburger button
+    // Toggle menu when hamburger is clicked
     if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('click', function() {
-            // Toggle the menu visibility
+        mobileMenuToggle.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent event bubbling
             navMenu.classList.toggle('active');
             
-            // Change the icon between hamburger and X
+            // Change icon between hamburger and X
             const icon = this.querySelector('i');
             if (icon.classList.contains('fa-bars')) {
                 icon.classList.remove('fa-bars');
@@ -38,6 +34,19 @@ document.addEventListener('DOMContentLoaded', function() {
             icon.classList.remove('fa-times');
             icon.classList.add('fa-bars');
         });
+    });
+    
+    // Close menu when clicking outside (on backdrop)
+    document.addEventListener('click', function(e) {
+        const isClickInsideMenu = navMenu.contains(e.target);
+        const isClickOnToggle = mobileMenuToggle.contains(e.target);
+        
+        if (!isClickInsideMenu && !isClickOnToggle && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            const icon = mobileMenuToggle.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
     });
 });
 
