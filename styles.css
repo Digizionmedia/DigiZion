@@ -37,7 +37,7 @@ a {
 }
 
 /* ========================================
-   NAVIGATION BAR (UPDATED WITH WORKING MOBILE MENU)
+   NAVIGATION BAR (COMPLETE WORKING VERSION)
    ======================================== */
 
 .navbar {
@@ -53,6 +53,7 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .logo h2 {
@@ -65,29 +66,101 @@ a {
     display: flex;
     list-style: none;
     gap: 30px;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-menu a {
     color: #333;
     font-weight: 500;
     transition: color 0.3s ease;
+    text-decoration: none;
 }
 
 .nav-menu a:hover {
     color: #2563eb;
 }
 
-/* Mobile menu button */
+/* Mobile menu button - HIDDEN on desktop */
 .mobile-menu-toggle {
     display: none;
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 28px;
     cursor: pointer;
     color: #333;
-    z-index: 1001;
+    padding: 10px;
 }
 
+/* ========================================
+   MOBILE RESPONSIVE (768px and below)
+   ======================================== */
+
+@media (max-width: 768px) {
+    
+    /* SHOW the hamburger button on mobile */
+    .mobile-menu-toggle {
+        display: block;
+        position: relative;
+        z-index: 1001;
+    }
+    
+    /* HIDE the regular menu by default, position it off-screen */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Hidden off-screen to the right */
+        width: 75%;
+        max-width: 300px;
+        height: 100vh;
+        background-color: #fff;
+        flex-direction: column;
+        padding: 80px 0 30px 0;
+        gap: 0;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+        transition: right 0.3s ease-in-out;
+        overflow-y: auto;
+        z-index: 1000;
+    }
+    
+    /* When menu has 'menu-open' class, slide it IN from the right */
+    .nav-menu.menu-open {
+        right: 0;
+    }
+    
+    .nav-menu li {
+        width: 100%;
+        border-bottom: 1px solid #e5e7eb;
+        margin: 0;
+    }
+    
+    .nav-menu a {
+        display: block;
+        padding: 20px 30px;
+        font-size: 18px;
+        color: #333;
+    }
+    
+    .nav-menu a:hover {
+        background-color: #f3f4f6;
+    }
+    
+    /* Dark overlay backdrop */
+    .menu-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        display: none;
+    }
+    
+    .menu-backdrop.show {
+        display: block;
+    }
+}
 /* ========================================
    MOBILE MENU STYLES
    ======================================== */

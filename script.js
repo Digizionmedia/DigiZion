@@ -1,53 +1,84 @@
 // ========================================
-// MOBILE MENU TOGGLE (UPDATED)
+// MOBILE MENU - GUARANTEED WORKING VERSION
 // ========================================
 
-document.addEventListener('DOMContentLoaded', function() {
+// Wait for page to fully load
+window.addEventListener('DOMContentLoaded', function() {
+    console.log('Page loaded, initializing mobile menu...'); // Debug message
     
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const navMenu = document.querySelector('.nav-menu');
+    // Get elements
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navMenu = document.getElementById('navMenu');
+    const menuIcon = document.getElementById('menuIcon');
+    const navLinks = document.querySelectorAll('.nav-link');
     
-    // Toggle menu when hamburger is clicked
-    if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('click', function(e) {
-            e.stopPropagation(); // Prevent event bubbling
-            navMenu.classList.toggle('active');
-            
-            // Change icon between hamburger and X
-            const icon = this.querySelector('i');
-            if (icon.classList.contains('fa-bars')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
+    // Check if elements exist
+    if (!mobileMenuBtn || !navMenu) {
+        console.error('Mobile menu elements not found!');
+        return;
     }
     
-    // Close menu when clicking on a link
-    const navLinks = document.querySelectorAll('.nav-menu a');
-    navLinks.forEach(link => {
+    console.log('Mobile menu elements found successfully'); // Debug message
+    
+    // Create backdrop
+    let backdrop = document.createElement('div');
+    backdrop.className = 'menu-backdrop';
+    document.body.appendChild(backdrop);
+    
+    // Function to open menu
+    function openMenu() {
+        console.log('Opening menu...'); // Debug message
+        navMenu.classList.add('menu-open');
+        backdrop.classList.add('show');
+        menuIcon.classList.remove('fa-bars');
+        menuIcon.classList.add('fa-times');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
+    
+    // Function to close menu
+    function closeMenu() {
+        console.log('Closing menu...'); // Debug message
+        navMenu.classList.remove('menu-open');
+        backdrop.classList.remove('show');
+        menuIcon.classList.remove('fa-times');
+        menuIcon.classList.add('fa-bars');
+        document.body.style.overflow = ''; // Restore scrolling
+    }
+    
+    // Toggle menu when button is clicked
+    mobileMenuBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log('Menu button clicked'); // Debug message
+        
+        if (navMenu.classList.contains('menu-open')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+    
+    // Close menu when backdrop is clicked
+    backdrop.addEventListener('click', function() {
+        console.log('Backdrop clicked'); // Debug message
+        closeMenu();
+    });
+    
+    // Close menu when any nav link is clicked
+    navLinks.forEach(function(link) {
         link.addEventListener('click', function() {
-            navMenu.classList.remove('active');
-            const icon = mobileMenuToggle.querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
+            console.log('Nav link clicked'); // Debug message
+            closeMenu();
         });
     });
     
-    // Close menu when clicking outside (on backdrop)
-    document.addEventListener('click', function(e) {
-        const isClickInsideMenu = navMenu.contains(e.target);
-        const isClickOnToggle = mobileMenuToggle.contains(e.target);
-        
-        if (!isClickInsideMenu && !isClickOnToggle && navMenu.classList.contains('active')) {
-            navMenu.classList.remove('active');
-            const icon = mobileMenuToggle.querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
+    // Close menu when pressing Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navMenu.classList.contains('menu-open')) {
+            closeMenu();
         }
     });
+    
+    console.log('Mobile menu initialized successfully!'); // Debug message
 });
 
 // ========================================
