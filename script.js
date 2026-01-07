@@ -42,41 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ========================================
-// CONTACT FORM HANDLING
-// ========================================
-
-// Get the contact form
-const contactForm = document.getElementById('contactForm');
-
-// When someone submits the form
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        // Prevent the default form submission
-        e.preventDefault();
-        
-        // Get all form values
-        const formData = {
-            name: document.getElementById('name').value,
-            school: document.getElementById('school').value,
-            phone: document.getElementById('phone').value,
-            email: document.getElementById('email').value,
-            service: document.getElementById('service').value,
-            message: document.getElementById('message').value
-        };
-        
-        // For now, we'll just show an alert
-        // Later, we'll connect this to an email service
-        alert(`Thank you, ${formData.name}! We've received your message and will contact you within 24 hours at ${formData.phone}.`);
-        
-        // Reset the form
-        contactForm.reset();
-        
-        // In the next phase, we'll add real form submission here
-        // that sends the data to your email
-    });
-}
-
-// ========================================
 // SMOOTH SCROLL FOR NAVIGATION LINKS
 // ========================================
 
@@ -168,3 +133,125 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// ========================================
+// ENHANCED CONTACT FORM HANDLING
+// ========================================
+
+const contactForm = document.getElementById('contactForm');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Get button elements
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoader = submitBtn.querySelector('.btn-loader');
+        
+        // Show loading state
+        btnText.style.display = 'none';
+        btnLoader.style.display = 'inline-flex';
+        submitBtn.disabled = true;
+        
+        // Get form data
+        const formData = new FormData(this);
+        
+        try {
+            // Submit to Formspree
+            const response = await fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                // Success! Show success message
+                document.getElementById('formSuccess').style.display = 'block';
+                document.getElementById('formError').style.display = 'none';
+                this.style.display = 'none';
+                
+                // Scroll to success message
+                document.getElementById('formSuccess').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                
+                // Optional: Send to Google Analytics if you set it up
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'form_submission', {
+                        'event_category': 'Contact',
+                        'event_label': 'Contact Form Submitted'
+                    });
+                }
+                
+            } else {
+                throw new Error('Form submission failed');
+            }
+            
+        } catch (error) {
+            // Error - show error message
+            console.error('Form error:', error);
+            document.getElementById('formError').style.display = 'block';
+            document.getElementById('formSuccess').style.display = 'none';
+            
+            // Reset button
+            btnText.style.display = 'inline';
+            btnLoader.style.display = 'none';
+            submitBtn.disabled = false;
+            
+            // Scroll to error message
+            document.getElementById('formError').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }
+    });
+}
+
+// ========================================
+// LEAD MAGNET FORM HANDLING
+// ========================================
+
+const leadMagnetForm = document.getElementById('leadMagnetForm');
+
+if (leadMagnetForm) {
+    leadMagnetForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const submitBtn = this.querySelector('button[type="submit"]');
+        
+        // Show loading
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        submitBtn.disabled = true;
+        
+        try {
+            // Here you would send to your email service
+            // For now, we'll simulate success
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // Show success message
+            document.getElementById('leadSuccess').style.display = 'block';
+            this.style.display = 'none';
+            
+            // Optional: Track conversion
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'lead_magnet_download', {
+                    'event_category': 'Lead Generation',
+                    'event_label': 'Checklist Download'
+                });
+            }
+            
+        } catch (error) {
+            alert('Sorry, something went wrong. Please email us at hello@digizionmedia.in to get the checklist.');
+            submitBtn.innerHTML = '<i class="fas fa-download"></i> Download Free Checklist';
+            submitBtn.disabled = false;
+        }
+    });
+}
+
+
+
