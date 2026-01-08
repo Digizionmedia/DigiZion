@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.digizionmedia.in/sitemap.xml
+
+# Block admin areas (if you add any later)
+Disallow: /admin/
+Disallow: /private/
