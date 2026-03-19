@@ -1,25 +1,229 @@
 // ========================================
-// DIGIZION MEDIA - PREMIUM DARK MODE
-// Main JavaScript File
+// DIGIZION MEDIA - ULTRA INTERACTIVE VERSION
+// All Animation Effects Included
 // ========================================
 
-// Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Digizion Media website initialized');
+    console.log('🚀 Digizion Media - Ultra Interactive Mode');
     
     // Initialize all features
     initMobileMenu();
-    initAnimatedCounters();
+    initTypingAnimation();
+    initScrollProgress();
+    initCursorEffects();
+    init3DCardTilt();
+    initParticles();
     initSmoothScroll();
     initContactForm();
     initScrollAnimations();
     initNavbarScroll();
+    initFloatingButtons();
+    initIndustryCardFlip();
+    initParallaxBackground();
     
-    console.log('✅ All features loaded successfully');
+    console.log('✅ All interactive features loaded!');
 });
 
 // ========================================
-// 1. MOBILE MENU
+// 1. TYPING ANIMATION (Hero Headline)
+// ========================================
+
+function initTypingAnimation() {
+    const heroTitle = document.querySelector('.hero-title');
+    if (!heroTitle) return;
+    
+    const originalText = heroTitle.innerHTML;
+    const words = [
+        'Transform Your Business',
+        'Grow Your Revenue',
+        'Dominate Your Market',
+        'Attract More Customers'
+    ];
+    
+    const staticPart = '<br>With <span class="gradient-text">Data-Driven</span> Digital Marketing';
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    function type() {
+        const currentWord = words[wordIndex];
+        
+        if (isDeleting) {
+            charIndex--;
+        } else {
+            charIndex++;
+        }
+        
+        heroTitle.innerHTML = currentWord.substring(0, charIndex) + 
+                             '<span class="typing-text"></span>' + 
+                             staticPart;
+        
+        let typeSpeed = isDeleting ? 50 : 100;
+        
+        if (!isDeleting && charIndex === currentWord.length) {
+            typeSpeed = 2000; // Pause at end
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            typeSpeed = 500;
+        }
+        
+        setTimeout(type, typeSpeed);
+    }
+    
+    // Start typing after 500ms
+    setTimeout(type, 500);
+    
+    console.log('✅ Typing animation initialized');
+}
+
+// ========================================
+// 2. SCROLL PROGRESS BAR
+// ========================================
+
+function initScrollProgress() {
+    const progressBar = document.createElement('div');
+    progressBar.className = 'scroll-progress';
+    document.body.appendChild(progressBar);
+    
+    window.addEventListener('scroll', function() {
+        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (window.scrollY / windowHeight) * 100;
+        progressBar.style.transform = `scaleX(${scrolled / 100})`;
+    });
+    
+    console.log('✅ Scroll progress bar initialized');
+}
+
+// ========================================
+// 3. CUSTOM CURSOR EFFECTS
+// ========================================
+
+function initCursorEffects() {
+    // Only on desktop
+    if (window.innerWidth < 768) return;
+    
+    const cursorDot = document.createElement('div');
+    cursorDot.className = 'cursor-dot';
+    document.body.appendChild(cursorDot);
+    
+    const cursorOutline = document.createElement('div');
+    cursorOutline.className = 'cursor-outline';
+    document.body.appendChild(cursorOutline);
+    
+    let mouseX = 0, mouseY = 0;
+    let outlineX = 0, outlineY = 0;
+    
+    document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        cursorDot.style.left = mouseX + 'px';
+        cursorDot.style.top = mouseY + 'px';
+    });
+    
+    // Smooth follow for outline
+    function animateCursor() {
+        outlineX += (mouseX - outlineX) * 0.1;
+        outlineY += (mouseY - outlineY) * 0.1;
+        
+        cursorOutline.style.left = outlineX - 20 + 'px';
+        cursorOutline.style.top = outlineY - 20 + 'px';
+        
+        requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+    
+    // Expand on clickable elements
+    const clickables = document.querySelectorAll('a, button, .industry-card, .service-card');
+    clickables.forEach(el => {
+        el.addEventListener('mouseenter', function() {
+            cursorOutline.style.transform = 'scale(1.5)';
+            cursorOutline.style.borderColor = '#FF3366';
+        });
+        
+        el.addEventListener('mouseleave', function() {
+            cursorOutline.style.transform = 'scale(1)';
+            cursorOutline.style.borderColor = '#00C9FF';
+        });
+    });
+    
+    console.log('✅ Custom cursor effects initialized');
+}
+
+// ========================================
+// 4. 3D CARD TILT EFFECT
+// ========================================
+
+function init3DCardTilt() {
+    const cards = document.querySelectorAll('[data-tilt], .difference-card, .service-card');
+    
+    cards.forEach(card => {
+        card.addEventListener('mousemove', function(e) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+        });
+    });
+    
+    console.log('✅ 3D card tilt initialized');
+}
+
+// ========================================
+// 5. FLOATING PARTICLES
+// ========================================
+
+function initParticles() {
+    const particleContainer = document.createElement('div');
+    particleContainer.className = 'particle-container';
+    document.body.appendChild(particleContainer);
+    
+    function createParticle() {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        const startX = Math.random() * window.innerWidth;
+        const colors = ['#FF3366', '#00C9FF', '#FFD700'];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        particle.style.left = startX + 'px';
+        particle.style.background = color;
+        particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        
+        particleContainer.appendChild(particle);
+        
+        setTimeout(() => {
+            particle.remove();
+        }, 10000);
+    }
+    
+    // Create 20 particles
+    for (let i = 0; i < 20; i++) {
+        setTimeout(createParticle, i * 500);
+    }
+    
+    // Continuously create new particles
+    setInterval(createParticle, 1000);
+    
+    console.log('✅ Floating particles initialized');
+}
+
+// ========================================
+// 6. MOBILE MENU
 // ========================================
 
 function initMobileMenu() {
@@ -28,17 +232,12 @@ function initMobileMenu() {
     const menuIcon = document.getElementById('menuIcon');
     const navLinks = document.querySelectorAll('.nav-link');
     
-    if (!mobileMenuBtn || !navMenu) {
-        console.warn('⚠️ Mobile menu elements not found');
-        return;
-    }
+    if (!mobileMenuBtn || !navMenu) return;
     
-    // Create backdrop
     let backdrop = document.createElement('div');
     backdrop.className = 'menu-backdrop';
     document.body.appendChild(backdrop);
     
-    // Open menu
     function openMenu() {
         navMenu.classList.add('menu-open');
         backdrop.classList.add('show');
@@ -47,7 +246,6 @@ function initMobileMenu() {
         document.body.style.overflow = 'hidden';
     }
     
-    // Close menu
     function closeMenu() {
         navMenu.classList.remove('menu-open');
         backdrop.classList.remove('show');
@@ -56,96 +254,23 @@ function initMobileMenu() {
         document.body.style.overflow = '';
     }
     
-    // Toggle on button click
     mobileMenuBtn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        
-        if (navMenu.classList.contains('menu-open')) {
-            closeMenu();
-        } else {
-            openMenu();
-        }
+        navMenu.classList.contains('menu-open') ? closeMenu() : openMenu();
     });
     
-    // Close on backdrop click
     backdrop.addEventListener('click', closeMenu);
-    
-    // Close on nav link click
-    navLinks.forEach(function(link) {
-        link.addEventListener('click', function() {
-            closeMenu();
-        });
-    });
-    
-    // Close on Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && navMenu.classList.contains('menu-open')) {
-            closeMenu();
-        }
+    navLinks.forEach(link => link.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && navMenu.classList.contains('menu-open')) closeMenu();
     });
     
     console.log('✅ Mobile menu initialized');
 }
 
 // ========================================
-// 2. ANIMATED COUNTERS (Hero Stats)
-// ========================================
-
-function initAnimatedCounters() {
-    const counters = document.querySelectorAll('.stat-number');
-    
-    if (counters.length === 0) {
-        console.warn('⚠️ No stat counters found');
-        return;
-    }
-    
-    const observerOptions = {
-        threshold: 0.5,
-        rootMargin: '0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-                animateCounter(entry.target);
-                entry.target.classList.add('counted');
-            }
-        });
-    }, observerOptions);
-    
-    counters.forEach(counter => observer.observe(counter));
-    
-    function animateCounter(element) {
-        const target = parseFloat(element.getAttribute('data-target'));
-        const duration = 2000; // 2 seconds
-        const increment = target / (duration / 16); // 60fps
-        let current = 0;
-        
-        const updateCounter = setInterval(function() {
-            current += increment;
-            
-            if (current >= target) {
-                current = target;
-                clearInterval(updateCounter);
-            }
-            
-            // Format number based on value
-            if (target >= 1000) {
-                element.textContent = Math.floor(current).toLocaleString();
-            } else if (target < 10) {
-                element.textContent = current.toFixed(1);
-            } else {
-                element.textContent = Math.floor(current);
-            }
-        }, 16);
-    }
-    
-    console.log('✅ Animated counters initialized');
-}
-
-// ========================================
-// 3. SMOOTH SCROLL
+// 7. SMOOTH SCROLL
 // ========================================
 
 function initSmoothScroll() {
@@ -154,8 +279,6 @@ function initSmoothScroll() {
     links.forEach(link => {
         link.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
-            
-            // Skip if it's just "#"
             if (href === '#') {
                 e.preventDefault();
                 return;
@@ -166,17 +289,6 @@ function initSmoothScroll() {
             
             if (targetElement) {
                 e.preventDefault();
-                
-                // Close mobile menu if open
-                const navMenu = document.getElementById('navMenu');
-                if (navMenu && navMenu.classList.contains('menu-open')) {
-                    const backdrop = document.querySelector('.menu-backdrop');
-                    navMenu.classList.remove('menu-open');
-                    if (backdrop) backdrop.classList.remove('show');
-                    document.body.style.overflow = '';
-                }
-                
-                // Smooth scroll with offset for fixed navbar
                 const navbarHeight = document.querySelector('.navbar').offsetHeight;
                 const targetPosition = targetElement.offsetTop - navbarHeight - 20;
                 
@@ -192,16 +304,12 @@ function initSmoothScroll() {
 }
 
 // ========================================
-// 4. CONTACT FORM HANDLING
+// 8. CONTACT FORM
 // ========================================
 
 function initContactForm() {
     const contactForm = document.getElementById('contactForm');
-    
-    if (!contactForm) {
-        console.warn('⚠️ Contact form not found');
-        return;
-    }
+    if (!contactForm) return;
     
     contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -209,61 +317,33 @@ function initContactForm() {
         const submitBtn = this.querySelector('button[type="submit"]');
         const btnText = submitBtn.querySelector('.btn-text');
         const btnLoader = submitBtn.querySelector('.btn-loader');
-        const formSuccess = document.getElementById('formSuccess');
-        const formError = document.getElementById('formError');
         
-        // Show loading state
         if (btnText && btnLoader) {
             btnText.style.display = 'none';
             btnLoader.style.display = 'inline-flex';
             submitBtn.disabled = true;
         }
         
-        // Get form data
         const formData = new FormData(this);
         
         try {
-            // Submit to Formspree (make sure to update YOUR_FORM_ID in HTML)
             const response = await fetch(this.action, {
                 method: 'POST',
                 body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
+                headers: { 'Accept': 'application/json' }
             });
             
             if (response.ok) {
-                // Success!
-                if (formSuccess) {
-                    formSuccess.style.display = 'block';
-                    formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-                if (formError) formError.style.display = 'none';
+                document.getElementById('formSuccess').style.display = 'block';
+                document.getElementById('formError').style.display = 'none';
                 this.style.display = 'none';
-                
-                // Track with analytics if available
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'form_submission', {
-                        'event_category': 'Contact',
-                        'event_label': 'Contact Form Submitted'
-                    });
-                }
-                
-                console.log('✅ Form submitted successfully');
             } else {
                 throw new Error('Form submission failed');
             }
-            
         } catch (error) {
-            console.error('❌ Form error:', error);
+            document.getElementById('formError').style.display = 'block';
+            document.getElementById('formSuccess').style.display = 'none';
             
-            if (formError) {
-                formError.style.display = 'block';
-                formError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-            if (formSuccess) formSuccess.style.display = 'none';
-            
-            // Reset button
             if (btnText && btnLoader) {
                 btnText.style.display = 'inline';
                 btnLoader.style.display = 'none';
@@ -276,34 +356,21 @@ function initContactForm() {
 }
 
 // ========================================
-// 5. SCROLL ANIMATIONS (Fade in elements)
+// 9. SCROLL ANIMATIONS
 // ========================================
 
 function initScrollAnimations() {
-    const animatedElements = document.querySelectorAll(
-        '.industry-card, .service-card, .comparison-row, .contact-method'
-    );
+    const animatedElements = document.querySelectorAll('.industry-card, .service-card, .difference-card');
     
-    if (animatedElements.length === 0) {
-        console.warn('⚠️ No elements to animate');
-        return;
-    }
-    
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
+    const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
     
-    // Set initial state and observe
     animatedElements.forEach(element => {
         element.style.opacity = '0';
         element.style.transform = 'translateY(30px)';
@@ -311,347 +378,120 @@ function initScrollAnimations() {
         observer.observe(element);
     });
     
-    console.log(`✅ Scroll animations initialized for ${animatedElements.length} elements`);
+    console.log('✅ Scroll animations initialized');
 }
 
 // ========================================
-// 6. NAVBAR SCROLL EFFECT
+// 10. NAVBAR SCROLL EFFECT
 // ========================================
 
 function initNavbarScroll() {
     const navbar = document.querySelector('.navbar');
-    
-    if (!navbar) {
-        console.warn('⚠️ Navbar not found');
-        return;
-    }
-    
-    let lastScroll = 0;
+    if (!navbar) return;
     
     window.addEventListener('scroll', function() {
-        const currentScroll = window.pageYOffset;
-        
-        // Add shadow when scrolled
-        if (currentScroll > 50) {
-            navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
-            navbar.style.background = 'rgba(15, 15, 15, 0.98)';
+        if (window.scrollY > 50) {
+            navbar.style.boxShadow = '0 4px 20px rgba(255, 51, 102, 0.3)';
+            navbar.style.background = 'rgba(10, 14, 39, 0.98)';
         } else {
             navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
-            navbar.style.background = 'rgba(15, 15, 15, 0.95)';
+            navbar.style.background = 'rgba(10, 14, 39, 0.95)';
         }
-        
-        // Hide navbar on scroll down, show on scroll up (optional)
-        // Uncomment below if you want this behavior
-        /*
-        if (currentScroll > lastScroll && currentScroll > 100) {
-            navbar.style.transform = 'translateY(-100%)';
-        } else {
-            navbar.style.transform = 'translateY(0)';
-        }
-        */
-        
-        lastScroll = currentScroll;
     });
     
     console.log('✅ Navbar scroll effect initialized');
 }
 
 // ========================================
-// 7. UTILITY FUNCTIONS
+// 11. FLOATING ACTION BUTTONS
 // ========================================
 
-// Debounce function for performance
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Check if element is in viewport
-function isInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-}
-
-// ========================================
-// 8. ENHANCED FEATURES (Optional)
-// ========================================
-
-// Add active state to nav links based on scroll position
-window.addEventListener('scroll', debounce(function() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
+function initFloatingButtons() {
+    const floatingActions = document.createElement('div');
+    floatingActions.className = 'floating-actions';
+    floatingActions.innerHTML = `
+        <div class="floating-btn" title="Scroll to Top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+        <div class="floating-btn" title="Call Us" onclick="window.location.href='tel:+919876543210'">
+            <i class="fas fa-phone"></i>
+        </div>
+    `;
+    document.body.appendChild(floatingActions);
     
-    let currentSection = '';
-    const scrollPosition = window.pageYOffset + 100;
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            currentSection = section.getAttribute('id');
+    // Show/hide based on scroll
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            floatingActions.style.opacity = '1';
+            floatingActions.style.pointerEvents = 'auto';
+        } else {
+            floatingActions.style.opacity = '0';
+            floatingActions.style.pointerEvents = 'none';
         }
     });
     
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + currentSection) {
-            link.classList.add('active');
-        }
-    });
-}, 100));
+    console.log('✅ Floating action buttons initialized');
+}
 
 // ========================================
-// 9. INDUSTRY CARD HOVER EFFECTS
+// 12. INDUSTRY CARD FLIP
 // ========================================
 
-document.addEventListener('DOMContentLoaded', function() {
+function initIndustryCardFlip() {
     const industryCards = document.querySelectorAll('.industry-card');
     
     industryCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            // Add subtle tilt effect on hover
-            this.style.transform = 'translateY(-8px) scale(1.02)';
-        });
+        // Double-click to flip (mobile-friendly)
+        let clickCount = 0;
+        let clickTimer = null;
         
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
-    });
-});
-
-// ========================================
-// 10. PERFORMANCE MONITORING (Development)
-// ========================================
-
-// Log page load performance
-window.addEventListener('load', function() {
-    if (window.performance) {
-        const perfData = window.performance.timing;
-        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-        
-        console.log(`⚡ Page loaded in ${pageLoadTime}ms`);
-        
-        // You can send this to analytics
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'timing_complete', {
-                'name': 'page_load',
-                'value': pageLoadTime,
-                'event_category': 'Performance'
-            });
-        }
-    }
-});
-
-// ========================================
-// 11. ERROR HANDLING
-// ========================================
-
-// Global error handler
-window.addEventListener('error', function(e) {
-    console.error('❌ Global error:', e.message);
-    // You can send errors to a logging service here
-});
-
-// Handle unhandled promise rejections
-window.addEventListener('unhandledrejection', function(e) {
-    console.error('❌ Unhandled promise rejection:', e.reason);
-});
-
-// ========================================
-// 12. ANALYTICS TRACKING (When you add Google Analytics)
-// ========================================
-
-// Track button clicks
-document.addEventListener('click', function(e) {
-    // Track CTA button clicks
-    if (e.target.classList.contains('btn-primary') || 
-        e.target.closest('.btn-primary')) {
-        
-        const buttonText = e.target.textContent || e.target.closest('.btn-primary').textContent;
-        
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'cta_click', {
-                'event_category': 'Button',
-                'event_label': buttonText.trim()
-            });
-        }
-        
-        console.log('📊 CTA clicked:', buttonText.trim());
-    }
-    
-    // Track industry card clicks
-    if (e.target.classList.contains('industry-card') || 
-        e.target.closest('.industry-card')) {
-        
-        const industryCard = e.target.classList.contains('industry-card') ? 
-                             e.target : e.target.closest('.industry-card');
-        const industryName = industryCard.querySelector('h3').textContent;
-        
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'industry_click', {
-                'event_category': 'Navigation',
-                'event_label': industryName
-            });
-        }
-        
-        console.log('📊 Industry clicked:', industryName);
-    }
-});
-
-// Track WhatsApp button clicks
-document.addEventListener('click', function(e) {
-    const whatsappLink = e.target.closest('.whatsapp-float') || 
-                        e.target.closest('a[href*="wa.me"]');
-    
-    if (whatsappLink) {
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'whatsapp_click', {
-                'event_category': 'Contact',
-                'event_label': 'WhatsApp Button'
-            });
-        }
-        
-        console.log('📊 WhatsApp button clicked');
-    }
-});
-
-// ========================================
-// 13. BROWSER COMPATIBILITY CHECKS
-// ========================================
-
-// Check for modern browser features
-function checkBrowserSupport() {
-    const features = {
-        'IntersectionObserver': 'IntersectionObserver' in window,
-        'Fetch API': 'fetch' in window,
-        'CSS Grid': CSS.supports('display', 'grid'),
-        'CSS Custom Properties': CSS.supports('--test', '0')
-    };
-    
-    console.log('🌐 Browser support:', features);
-    
-    // Warn if critical features are missing
-    Object.keys(features).forEach(feature => {
-        if (!features[feature]) {
-            console.warn(`⚠️ ${feature} not supported - some features may not work`);
-        }
-    });
-}
-
-checkBrowserSupport();
-
-// ========================================
-// 14. ACCESSIBILITY ENHANCEMENTS
-// ========================================
-
-// Add keyboard navigation for industry cards
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' || e.key === ' ') {
-        const focused = document.activeElement;
-        
-        if (focused.classList.contains('industry-card')) {
-            e.preventDefault();
-            focused.click();
-        }
-    }
-});
-
-// Add focus visible indicators
-document.addEventListener('DOMContentLoaded', function() {
-    const focusableElements = document.querySelectorAll(
-        'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
-    );
-    
-    focusableElements.forEach(element => {
-        element.addEventListener('focus', function() {
-            this.classList.add('focus-visible');
-        });
-        
-        element.addEventListener('blur', function() {
-            this.classList.remove('focus-visible');
-        });
-    });
-});
-
-// ========================================
-// 15. DEVELOPMENT HELPERS
-// ========================================
-
-// Console styling for development
-const devMode = window.location.hostname === 'localhost' || 
-                window.location.hostname === '127.0.0.1';
-
-if (devMode) {
-    console.log(
-        '%c🚀 Digizion Media - Developer Mode',
-        'background: linear-gradient(135deg, #6C63FF 0%, #00D9FF 100%); color: white; padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 8px;'
-    );
-    
-    console.log(
-        '%cWebsite by Digizion Media | Premium Dark Mode Theme',
-        'color: #6C63FF; font-size: 12px;'
-    );
-}
-
-// Quick access to common elements (for debugging)
-window.digizion = {
-    navbar: document.querySelector('.navbar'),
-    hero: document.querySelector('.hero'),
-    contactForm: document.getElementById('contactForm'),
-    version: '1.0.0',
-    theme: 'dark-premium'
-};
-
-console.log('🎨 Digizion object available in console:', window.digizion);
-
-// ========================================
-// 16. LAZY LOADING (For future images)
-// ========================================
-
-// When you add images, this will lazy load them
-function initLazyLoading() {
-    const images = document.querySelectorAll('img[data-src]');
-    
-    if (images.length === 0) return;
-    
-    const imageObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.add('loaded');
-                imageObserver.unobserve(img);
+        card.addEventListener('click', function(e) {
+            clickCount++;
+            
+            if (clickCount === 1) {
+                clickTimer = setTimeout(function() {
+                    clickCount = 0;
+                }, 300);
+            } else if (clickCount === 2) {
+                clearTimeout(clickTimer);
+                clickCount = 0;
+                card.classList.toggle('flipped');
             }
         });
     });
     
-    images.forEach(img => imageObserver.observe(img));
+    console.log('✅ Industry card flip initialized');
+}
+
+// ========================================
+// 13. PARALLAX BACKGROUND
+// ========================================
+
+function initParallaxBackground() {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
     
-    console.log(`✅ Lazy loading initialized for ${images.length} images`);
-}
-
-// Initialize when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initLazyLoading);
-} else {
-    initLazyLoading();
+    const parallaxBg = document.createElement('div');
+    parallaxBg.className = 'parallax-bg';
+    hero.insertBefore(parallaxBg, hero.firstChild);
+    
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        parallaxBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+    });
+    
+    console.log('✅ Parallax background initialized');
 }
 
 // ========================================
-// END OF MAIN JAVASCRIPT
+// 14. ANALYTICS TRACKING
 // ========================================
 
-console.log('✨ Digizion Media website fully loaded and interactive!');
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('btn-primary') || e.target.closest('.btn-primary')) {
+        const buttonText = e.target.textContent || e.target.closest('.btn-primary').textContent;
+        console.log('📊 CTA clicked:', buttonText.trim());
+    }
+});
+
+console.log('✨ Digizion Media - Ultra Interactive Mode Ready!');
