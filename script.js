@@ -1,497 +1,683 @@
-// ========================================
-// DIGIZION MEDIA - ULTRA INTERACTIVE VERSION
-// All Animation Effects Included
-// ========================================
-
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Digizion Media - Ultra Interactive Mode');
-    
-    // Initialize all features
-    initMobileMenu();
-    initTypingAnimation();
-    initScrollProgress();
-    initCursorEffects();
-    init3DCardTilt();
-    initParticles();
-    initSmoothScroll();
-    initContactForm();
-    initScrollAnimations();
-    initNavbarScroll();
-    initFloatingButtons();
-    initIndustryCardFlip();
-    initParallaxBackground();
-    
-    console.log('✅ All interactive features loaded!');
-});
+/* ========================================
+   DIGIZION MEDIA - MARKETING DETECTIVES
+   Main JavaScript File
+   ======================================== */
 
 // ========================================
-// 1. TYPING ANIMATION (Hero Headline)
+// MOBILE MENU TOGGLE
 // ========================================
 
-function initTypingAnimation() {
-    const heroTitle = document.querySelector('.hero-title');
-    if (!heroTitle) return;
-    
-    const originalText = heroTitle.innerHTML;
-    const words = [
-        'Transform Your Business',
-        'Grow Your Revenue',
-        'Dominate Your Market',
-        'Attract More Customers'
-    ];
-    
-    const staticPart = '<br>With <span class="gradient-text">Data-Driven</span> Digital Marketing';
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    
-    function type() {
-        const currentWord = words[wordIndex];
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const navMenu = document.getElementById('navMenu');
+const menuIcon = document.getElementById('menuIcon');
+
+if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
         
-        if (isDeleting) {
-            charIndex--;
+        // Toggle icon between bars and times
+        if (navMenu.classList.contains('active')) {
+            menuIcon.classList.remove('fa-bars');
+            menuIcon.classList.add('fa-times');
         } else {
-            charIndex++;
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');
         }
-        
-        heroTitle.innerHTML = currentWord.substring(0, charIndex) + 
-                             '<span class="typing-text"></span>' + 
-                             staticPart;
-        
-        let typeSpeed = isDeleting ? 50 : 100;
-        
-        if (!isDeleting && charIndex === currentWord.length) {
-            typeSpeed = 2000; // Pause at end
-            isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            wordIndex = (wordIndex + 1) % words.length;
-            typeSpeed = 500;
-        }
-        
-        setTimeout(type, typeSpeed);
-    }
-    
-    // Start typing after 500ms
-    setTimeout(type, 500);
-    
-    console.log('✅ Typing animation initialized');
-}
-
-// ========================================
-// 2. SCROLL PROGRESS BAR
-// ========================================
-
-function initScrollProgress() {
-    const progressBar = document.createElement('div');
-    progressBar.className = 'scroll-progress';
-    document.body.appendChild(progressBar);
-    
-    window.addEventListener('scroll', function() {
-        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (window.scrollY / windowHeight) * 100;
-        progressBar.style.transform = `scaleX(${scrolled / 100})`;
     });
-    
-    console.log('✅ Scroll progress bar initialized');
 }
 
-// ========================================
-// 3. CUSTOM CURSOR EFFECTS
-// ========================================
-
-function initCursorEffects() {
-    // Only on desktop
-    if (window.innerWidth < 768) return;
-    
-    const cursorDot = document.createElement('div');
-    cursorDot.className = 'cursor-dot';
-    document.body.appendChild(cursorDot);
-    
-    const cursorOutline = document.createElement('div');
-    cursorOutline.className = 'cursor-outline';
-    document.body.appendChild(cursorOutline);
-    
-    let mouseX = 0, mouseY = 0;
-    let outlineX = 0, outlineY = 0;
-    
-    document.addEventListener('mousemove', function(e) {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        
-        cursorDot.style.left = mouseX + 'px';
-        cursorDot.style.top = mouseY + 'px';
-    });
-    
-    // Smooth follow for outline
-    function animateCursor() {
-        outlineX += (mouseX - outlineX) * 0.1;
-        outlineY += (mouseY - outlineY) * 0.1;
-        
-        cursorOutline.style.left = outlineX - 20 + 'px';
-        cursorOutline.style.top = outlineY - 20 + 'px';
-        
-        requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-    
-    // Expand on clickable elements
-    const clickables = document.querySelectorAll('a, button, .industry-card, .service-card');
-    clickables.forEach(el => {
-        el.addEventListener('mouseenter', function() {
-            cursorOutline.style.transform = 'scale(1.5)';
-            cursorOutline.style.borderColor = '#FF3366';
-        });
-        
-        el.addEventListener('mouseleave', function() {
-            cursorOutline.style.transform = 'scale(1)';
-            cursorOutline.style.borderColor = '#00C9FF';
-        });
-    });
-    
-    console.log('✅ Custom cursor effects initialized');
-}
-
-// ========================================
-// 4. 3D CARD TILT EFFECT
-// ========================================
-
-function init3DCardTilt() {
-    const cards = document.querySelectorAll('[data-tilt], .difference-card, .service-card');
-    
-    cards.forEach(card => {
-        card.addEventListener('mousemove', function(e) {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 10;
-            const rotateY = (centerX - x) / 10;
-            
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
-        });
-    });
-    
-    console.log('✅ 3D card tilt initialized');
-}
-
-// ========================================
-// 5. FLOATING PARTICLES
-// ========================================
-
-function initParticles() {
-    const particleContainer = document.createElement('div');
-    particleContainer.className = 'particle-container';
-    document.body.appendChild(particleContainer);
-    
-    function createParticle() {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        
-        const startX = Math.random() * window.innerWidth;
-        const colors = ['#FF3366', '#00C9FF', '#FFD700'];
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        
-        particle.style.left = startX + 'px';
-        particle.style.background = color;
-        particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
-        particle.style.animationDelay = Math.random() * 5 + 's';
-        
-        particleContainer.appendChild(particle);
-        
-        setTimeout(() => {
-            particle.remove();
-        }, 10000);
-    }
-    
-    // Create 20 particles
-    for (let i = 0; i < 20; i++) {
-        setTimeout(createParticle, i * 500);
-    }
-    
-    // Continuously create new particles
-    setInterval(createParticle, 1000);
-    
-    console.log('✅ Floating particles initialized');
-}
-
-// ========================================
-// 6. MOBILE MENU
-// ========================================
-
-function initMobileMenu() {
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const navMenu = document.getElementById('navMenu');
-    const menuIcon = document.getElementById('menuIcon');
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    if (!mobileMenuBtn || !navMenu) return;
-    
-    let backdrop = document.createElement('div');
-    backdrop.className = 'menu-backdrop';
-    document.body.appendChild(backdrop);
-    
-    function openMenu() {
-        navMenu.classList.add('menu-open');
-        backdrop.classList.add('show');
-        menuIcon.classList.remove('fa-bars');
-        menuIcon.classList.add('fa-times');
-        document.body.style.overflow = 'hidden';
-    }
-    
-    function closeMenu() {
-        navMenu.classList.remove('menu-open');
-        backdrop.classList.remove('show');
+// Close mobile menu when clicking on nav links
+const navLinks = document.querySelectorAll('.nav-link');
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
         menuIcon.classList.remove('fa-times');
         menuIcon.classList.add('fa-bars');
-        document.body.style.overflow = '';
+    });
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-wrapper') && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        menuIcon.classList.remove('fa-times');
+        menuIcon.classList.add('fa-bars');
+    }
+});
+
+
+// ========================================
+// STICKY NAVIGATION
+// ========================================
+
+const navbar = document.querySelector('.navbar');
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    // Add shadow on scroll
+    if (currentScroll > 50) {
+        navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
+    } else {
+        navbar.style.boxShadow = 'none';
     }
     
-    mobileMenuBtn.addEventListener('click', function(e) {
+    lastScroll = currentScroll;
+});
+
+
+// ========================================
+// SMOOTH SCROLL FOR ANCHOR LINKS
+// ========================================
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        e.stopPropagation();
-        navMenu.classList.contains('menu-open') ? closeMenu() : openMenu();
+        const target = document.querySelector(this.getAttribute('href'));
+        
+        if (target) {
+            const navHeight = navbar.offsetHeight;
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
     });
+});
+
+
+// ========================================
+// ACTIVE NAV LINK ON SCROLL
+// ========================================
+
+const sections = document.querySelectorAll('section[id]');
+
+function highlightNavLink() {
+    const scrollY = window.pageYOffset;
     
-    backdrop.addEventListener('click', closeMenu);
-    navLinks.forEach(link => link.addEventListener('click', closeMenu));
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && navMenu.classList.contains('menu-open')) closeMenu();
+    sections.forEach(section => {
+        const sectionHeight = section.offsetHeight;
+        const sectionTop = section.offsetTop - 100;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${sectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
     });
-    
-    console.log('✅ Mobile menu initialized');
 }
 
+window.addEventListener('scroll', highlightNavLink);
+
+
 // ========================================
-// 7. SMOOTH SCROLL
+// TYPING ANIMATION FOR MYSTERY QUESTIONS
 // ========================================
 
-function initSmoothScroll() {
-    const links = document.querySelectorAll('a[href^="#"]');
+const mysteryQuestions = document.querySelectorAll('.mystery-q');
+
+if (mysteryQuestions.length > 0) {
+    let currentQuestionIndex = 0;
     
-    links.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if (href === '#') {
-                e.preventDefault();
-                return;
-            }
-            
-            const targetId = href.substring(1);
-            const targetElement = document.getElementById(targetId);
-            
-            if (targetElement) {
-                e.preventDefault();
-                const navbarHeight = document.querySelector('.navbar').offsetHeight;
-                const targetPosition = targetElement.offsetTop - navbarHeight - 20;
+    function typeQuestion(element, text, speed = 50) {
+        let i = 0;
+        element.textContent = '';
+        element.style.opacity = '1';
+        
+        const typing = setInterval(() => {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+            } else {
+                clearInterval(typing);
                 
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
+                // Wait 2 seconds then fade out and show next question
+                setTimeout(() => {
+                    element.style.opacity = '0';
+                    setTimeout(() => {
+                        currentQuestionIndex = (currentQuestionIndex + 1) % mysteryQuestions.length;
+                        typeQuestion(
+                            mysteryQuestions[currentQuestionIndex],
+                            mysteryQuestions[currentQuestionIndex].getAttribute('data-text') || mysteryQuestions[currentQuestionIndex].textContent
+                        );
+                    }, 500);
+                }, 2000);
+            }
+        }, speed);
+    }
+    
+    // Store original text and hide all questions except first
+    mysteryQuestions.forEach((q, index) => {
+        q.setAttribute('data-text', q.textContent);
+        if (index !== 0) {
+            q.style.opacity = '0';
+        }
+    });
+    
+    // Start typing animation
+    setTimeout(() => {
+        typeQuestion(mysteryQuestions[0], mysteryQuestions[0].textContent);
+    }, 1000);
+}
+
+
+// ========================================
+// SCROLL REVEAL ANIMATIONS
+// ========================================
+
+const revealElements = document.querySelectorAll('.reveal-on-scroll');
+
+function revealOnScroll() {
+    revealElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        if (elementTop < windowHeight - 100) {
+            element.classList.add('revealed');
+        }
+    });
+}
+
+window.addEventListener('scroll', revealOnScroll);
+revealOnScroll(); // Check on page load
+
+
+// ========================================
+// COUNTER ANIMATION
+// ========================================
+
+function animateCounter(element, target, duration = 2000) {
+    const start = 0;
+    const increment = target / (duration / 16);
+    let current = start;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            element.textContent = target;
+            clearInterval(timer);
+        } else {
+            element.textContent = Math.floor(current);
+        }
+    }, 16);
+}
+
+// Trigger counters when visible
+const statNumbers = document.querySelectorAll('.stat-number');
+let countersAnimated = false;
+
+function animateCountersOnScroll() {
+    if (countersAnimated) return;
+    
+    statNumbers.forEach(stat => {
+        const elementTop = stat.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        if (elementTop < windowHeight - 100) {
+            countersAnimated = true;
+            const target = parseInt(stat.getAttribute('data-target'));
+            animateCounter(stat, target);
+        }
+    });
+}
+
+window.addEventListener('scroll', animateCountersOnScroll);
+animateCountersOnScroll();
+
+
+// ========================================
+// FAQ ACCORDION
+// ========================================
+
+const faqItems = document.querySelectorAll('.faq-item');
+
+faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    
+    if (question) {
+        question.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            
+            // Close all FAQs
+            faqItems.forEach(faq => {
+                faq.classList.remove('active');
+                const answer = faq.querySelector('.faq-answer');
+                if (answer) {
+                    answer.style.maxHeight = null;
+                }
+            });
+            
+            // Open clicked FAQ if it wasn't active
+            if (!isActive) {
+                item.classList.add('active');
+                const answer = item.querySelector('.faq-answer');
+                if (answer) {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                }
             }
         });
-    });
-    
-    console.log('✅ Smooth scroll initialized');
-}
+    }
+});
+
 
 // ========================================
-// 8. CONTACT FORM
+// FORM SUBMISSION HANDLING
 // ========================================
 
-function initContactForm() {
-    const contactForm = document.getElementById('contactForm');
-    if (!contactForm) return;
-    
-    contactForm.addEventListener('submit', async function(e) {
+const contactForm = document.getElementById('contactForm');
+const formSuccess = document.getElementById('formSuccess');
+const formError = document.getElementById('formError');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        const submitBtn = this.querySelector('button[type="submit"]');
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
         const btnText = submitBtn.querySelector('.btn-text');
         const btnLoader = submitBtn.querySelector('.btn-loader');
         
-        if (btnText && btnLoader) {
-            btnText.style.display = 'none';
-            btnLoader.style.display = 'inline-flex';
-            submitBtn.disabled = true;
-        }
+        // Show loading state
+        btnText.style.display = 'none';
+        btnLoader.style.display = 'flex';
+        submitBtn.disabled = true;
         
-        const formData = new FormData(this);
+        // Get form data
+        const formData = new FormData(contactForm);
         
         try {
-            const response = await fetch(this.action, {
+            // Submit to FormSubmit.co
+            const response = await fetch(contactForm.action, {
                 method: 'POST',
                 body: formData,
-                headers: { 'Accept': 'application/json' }
+                headers: {
+                    'Accept': 'application/json'
+                }
             });
             
             if (response.ok) {
-                document.getElementById('formSuccess').style.display = 'block';
-                document.getElementById('formError').style.display = 'none';
-                this.style.display = 'none';
+                // Success
+                contactForm.style.display = 'none';
+                formSuccess.style.display = 'block';
+                
+                // Send to Google Analytics if available
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'form_submission', {
+                        'event_category': 'Contact',
+                        'event_label': 'Mystery Analysis Request'
+                    });
+                }
+                
+                // Reset form
+                contactForm.reset();
+                
+                // Scroll to success message
+                formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
             } else {
                 throw new Error('Form submission failed');
             }
+            
         } catch (error) {
-            document.getElementById('formError').style.display = 'block';
-            document.getElementById('formSuccess').style.display = 'none';
+            console.error('Form submission error:', error);
             
-            if (btnText && btnLoader) {
-                btnText.style.display = 'inline';
-                btnLoader.style.display = 'none';
-                submitBtn.disabled = false;
-            }
+            // Show error message
+            contactForm.style.display = 'none';
+            formError.style.display = 'block';
+            
+            // Scroll to error message
+            formError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } finally {
+            // Reset button state
+            btnText.style.display = 'flex';
+            btnLoader.style.display = 'none';
+            submitBtn.disabled = false;
         }
     });
-    
-    console.log('✅ Contact form initialized');
 }
 
-// ========================================
-// 9. SCROLL ANIMATIONS
-// ========================================
-
-function initScrollAnimations() {
-    const animatedElements = document.querySelectorAll('.industry-card, .service-card, .difference-card');
-    
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    
-    animatedElements.forEach(element => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(30px)';
-        element.style.transition = 'all 0.6s ease';
-        observer.observe(element);
-    });
-    
-    console.log('✅ Scroll animations initialized');
-}
 
 // ========================================
-// 10. NAVBAR SCROLL EFFECT
+// PRICING TOGGLE (Monthly/Quarterly)
 // ========================================
 
-function initNavbarScroll() {
-    const navbar = document.querySelector('.navbar');
-    if (!navbar) return;
-    
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-            navbar.style.boxShadow = '0 4px 20px rgba(255, 51, 102, 0.3)';
-            navbar.style.background = 'rgba(10, 14, 39, 0.98)';
-        } else {
-            navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
-            navbar.style.background = 'rgba(10, 14, 39, 0.95)';
-        }
-    });
-    
-    console.log('✅ Navbar scroll effect initialized');
-}
+const pricingToggles = document.querySelectorAll('.pricing-toggle');
 
-// ========================================
-// 11. FLOATING ACTION BUTTONS
-// ========================================
-
-function initFloatingButtons() {
-    const floatingActions = document.createElement('div');
-    floatingActions.className = 'floating-actions';
-    floatingActions.innerHTML = `
-        <div class="floating-btn" title="Scroll to Top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-            <i class="fas fa-arrow-up"></i>
-        </div>
-        <div class="floating-btn" title="Call Us" onclick="window.location.href='tel:+919876543210'">
-            <i class="fas fa-phone"></i>
-        </div>
-    `;
-    document.body.appendChild(floatingActions);
-    
-    // Show/hide based on scroll
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
-            floatingActions.style.opacity = '1';
-            floatingActions.style.pointerEvents = 'auto';
-        } else {
-            floatingActions.style.opacity = '0';
-            floatingActions.style.pointerEvents = 'none';
-        }
-    });
-    
-    console.log('✅ Floating action buttons initialized');
-}
-
-// ========================================
-// 12. INDUSTRY CARD FLIP
-// ========================================
-
-function initIndustryCardFlip() {
-    const industryCards = document.querySelectorAll('.industry-card');
-    
-    industryCards.forEach(card => {
-        // Double-click to flip (mobile-friendly)
-        let clickCount = 0;
-        let clickTimer = null;
+pricingToggles.forEach(toggle => {
+    toggle.addEventListener('click', () => {
+        const isMonthly = toggle.classList.contains('monthly');
         
-        card.addEventListener('click', function(e) {
-            clickCount++;
+        // Update active state
+        document.querySelectorAll('.pricing-toggle').forEach(t => t.classList.remove('active'));
+        toggle.classList.add('active');
+        
+        // Update prices
+        document.querySelectorAll('.price-value').forEach(price => {
+            const monthlyPrice = price.getAttribute('data-monthly');
+            const quarterlyPrice = price.getAttribute('data-quarterly');
             
-            if (clickCount === 1) {
-                clickTimer = setTimeout(function() {
-                    clickCount = 0;
-                }, 300);
-            } else if (clickCount === 2) {
-                clearTimeout(clickTimer);
-                clickCount = 0;
-                card.classList.toggle('flipped');
+            if (isMonthly) {
+                price.textContent = monthlyPrice;
+                price.parentElement.querySelector('.price-period').textContent = '/month';
+            } else {
+                price.textContent = quarterlyPrice;
+                price.parentElement.querySelector('.price-period').textContent = '/quarter';
             }
         });
     });
-    
-    console.log('✅ Industry card flip initialized');
-}
+});
+
 
 // ========================================
-// 13. PARALLAX BACKGROUND
+// CASE FILE MODALS
 // ========================================
 
-function initParallaxBackground() {
-    const hero = document.querySelector('.hero');
-    if (!hero) return;
-    
-    const parallaxBg = document.createElement('div');
-    parallaxBg.className = 'parallax-bg';
-    hero.insertBefore(parallaxBg, hero.firstChild);
-    
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        parallaxBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+const caseCards = document.querySelectorAll('.case-card');
+const modals = document.querySelectorAll('.case-modal');
+const modalCloses = document.querySelectorAll('.modal-close');
+
+caseCards.forEach(card => {
+    card.addEventListener('click', () => {
+        const caseId = card.getAttribute('data-case');
+        const modal = document.querySelector(`[data-modal="${caseId}"]`);
+        
+        if (modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
     });
-    
-    console.log('✅ Parallax background initialized');
-}
+});
 
-// ========================================
-// 14. ANALYTICS TRACKING
-// ========================================
+modalCloses.forEach(close => {
+    close.addEventListener('click', () => {
+        modals.forEach(modal => {
+            modal.classList.remove('active');
+        });
+        document.body.style.overflow = 'auto';
+    });
+});
 
-document.addEventListener('click', function(e) {
-    if (e.target.classList.contains('btn-primary') || e.target.closest('.btn-primary')) {
-        const buttonText = e.target.textContent || e.target.closest('.btn-primary').textContent;
-        console.log('📊 CTA clicked:', buttonText.trim());
+// Close modal on background click
+modals.forEach(modal => {
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+});
+
+// Close modal on ESC key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        modals.forEach(modal => {
+            modal.classList.remove('active');
+        });
+        document.body.style.overflow = 'auto';
     }
 });
 
-console.log('✨ Digizion Media - Ultra Interactive Mode Ready!');
+
+// ========================================
+// FLOATING WHATSAPP BUTTON
+// ========================================
+
+const whatsappBtn = document.querySelector('.whatsapp-float');
+
+if (whatsappBtn) {
+    // Show after 3 seconds
+    setTimeout(() => {
+        whatsappBtn.classList.add('show');
+    }, 3000);
+    
+    // Pulse animation every 10 seconds
+    setInterval(() => {
+        whatsappBtn.classList.add('pulse');
+        setTimeout(() => {
+            whatsappBtn.classList.remove('pulse');
+        }, 1000);
+    }, 10000);
+}
+
+
+// ========================================
+// LAZY LOADING FOR IMAGES
+// ========================================
+
+const lazyImages = document.querySelectorAll('img[data-src]');
+
+const imageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+            observer.unobserve(img);
+        }
+    });
+});
+
+lazyImages.forEach(img => imageObserver.observe(img));
+
+
+// ========================================
+// CLUE FLOATING ANIMATION
+// ========================================
+
+const clues = document.querySelectorAll('.clue');
+
+clues.forEach((clue, index) => {
+    // Random starting position
+    const randomX = Math.random() * 100;
+    const randomY = Math.random() * 100;
+    clue.style.left = randomX + '%';
+    clue.style.top = randomY + '%';
+    
+    // Random animation delay
+    clue.style.animationDelay = (index * 0.5) + 's';
+});
+
+
+// ========================================
+// TESTIMONIAL SLIDER (if testimonials exist)
+// ========================================
+
+const testimonialSlider = document.querySelector('.testimonials-slider');
+
+if (testimonialSlider) {
+    let currentSlide = 0;
+    const slides = testimonialSlider.querySelectorAll('.testimonial-card');
+    const totalSlides = slides.length;
+    
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.style.display = i === index ? 'block' : 'none';
+        });
+    }
+    
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        showSlide(currentSlide);
+    }
+    
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        showSlide(currentSlide);
+    }
+    
+    // Auto-advance every 5 seconds
+    setInterval(nextSlide, 5000);
+    
+    // Show first slide
+    showSlide(0);
+    
+    // Add navigation buttons if they exist
+    const prevBtn = document.querySelector('.testimonial-prev');
+    const nextBtn = document.querySelector('.testimonial-next');
+    
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+}
+
+
+// ========================================
+// PERFORMANCE: Debounce scroll events
+// ========================================
+
+function debounce(func, wait = 10) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Apply debounce to scroll-heavy functions
+window.addEventListener('scroll', debounce(highlightNavLink, 10));
+window.addEventListener('scroll', debounce(revealOnScroll, 10));
+
+
+// ========================================
+// CONSOLE MESSAGE (Easter Egg)
+// ========================================
+
+console.log('%c🔍 DIGIZION MEDIA - Marketing Detectives', 'font-size: 20px; font-weight: bold; color: #6366F1;');
+console.log('%cLooking for clues in the code? We like that! 🕵️‍♂️', 'font-size: 14px; color: #EC4899;');
+console.log('%cInterested in working with us? Visit: https://www.digizionmedia.in', 'font-size: 12px; color: #10B981;');
+
+
+// ========================================
+// PAGE LOAD ANIMATION
+// ========================================
+
+window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+    
+    // Trigger initial animations
+    setTimeout(() => {
+        const heroElements = document.querySelectorAll('.hero-badge, .hero-title, .mystery-questions, .hero-subtitle, .hero-description, .hero-cta');
+        heroElements.forEach((el, index) => {
+            setTimeout(() => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+    }, 200);
+});
+
+
+// ========================================
+// COOKIE CONSENT (Optional)
+// ========================================
+
+const cookieConsent = document.querySelector('.cookie-consent');
+const cookieAccept = document.querySelector('.cookie-accept');
+
+if (cookieConsent && cookieAccept) {
+    // Check if user already accepted
+    if (!localStorage.getItem('cookieConsent')) {
+        setTimeout(() => {
+            cookieConsent.classList.add('show');
+        }, 2000);
+    }
+    
+    cookieAccept.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'true');
+        cookieConsent.classList.remove('show');
+    });
+}
+
+
+// ========================================
+// EMAIL PROTECTION
+// ========================================
+
+// Decode email addresses on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const encodedEmails = document.querySelectorAll('[data-email]');
+    encodedEmails.forEach(el => {
+        const email = atob(el.getAttribute('data-email'));
+        el.href = `mailto:${email}`;
+        el.textContent = email;
+    });
+});
+
+
+// ========================================
+// ANALYTICS TRACKING
+// ========================================
+
+// Track button clicks
+document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'button_click', {
+                'event_category': 'CTA',
+                'event_label': btn.textContent.trim()
+            });
+        }
+    });
+});
+
+// Track service card clicks
+document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('click', () => {
+        if (typeof gtag !== 'undefined') {
+            const serviceName = card.querySelector('h3').textContent;
+            gtag('event', 'service_view', {
+                'event_category': 'Services',
+                'event_label': serviceName
+            });
+        }
+    });
+});
+
+
+// ========================================
+// UTILITY FUNCTIONS
+// ========================================
+
+// Detect if user is on mobile
+function isMobile() {
+    return window.innerWidth <= 768;
+}
+
+// Get scroll percentage
+function getScrollPercentage() {
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight - windowHeight;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return (scrollTop / documentHeight) * 100;
+}
+
+// Animate element on scroll into view
+function animateOnScroll(element, animationClass) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add(animationClass);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    observer.observe(element);
+}
+
+// Export for use in other scripts if needed
+window.DigizionUtils = {
+    isMobile,
+    getScrollPercentage,
+    animateOnScroll,
+    debounce
+};
