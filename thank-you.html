@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - Case Received | Digizion Media</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366F1;
+            --secondary: #EC4899;
+            --success: #10B981;
+            --dark-bg: #0F172A;
+            --card-bg: #1E293B;
+            --text: #FFFFFF;
+            --text-muted: #94A3B8;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .thank-you-container {
+            max-width: 600px;
+            text-align: center;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            animation: scaleIn 0.5s ease 0.3s backwards;
+            box-shadow: 0 20px 60px rgba(16, 185, 129, 0.4);
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .checkmark {
+            animation: checkmark 0.8s ease 0.6s backwards;
+        }
+
+        @keyframes checkmark {
+            0% {
+                transform: scale(0) rotate(-45deg);
+            }
+            50% {
+                transform: scale(1.2) rotate(-45deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.6s ease 0.4s backwards;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            animation: fadeInUp 0.6s ease 0.5s backwards;
+        }
+
+        .info-box {
+            background: var(--card-bg);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            animation: fadeInUp 0.6s ease 0.6s backwards;
+        }
+
+        .info-box h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .next-steps {
+            list-style: none;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .next-steps li {
+            padding: 12px 0;
+            display: flex;
+            align-items: start;
+            gap: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .next-steps li:last-child {
+            border-bottom: none;
+        }
+
+        .next-steps i {
+            color: var(--success);
+            margin-top: 4px;
+            font-size: 18px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.6s ease 0.7s backwards;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(99, 102, 241, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .contact-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+            animation: fadeInUp 0.6s ease 0.8s backwards;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .contact-card i {
+            font-size: 32px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-card h4 {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .detective-badge {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 50px;
+            padding: 8px 20px;
+            margin-top: 30px;
+            font-size: 14px;
+            color: var(--primary);
+            animation: fadeInUp 0.6s ease 0.9s backwards;
+        }
+
+        .detective-badge i {
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+            }
+
+            .success-icon {
+                width: 100px;
+                height: 100px;
+                font-size: 50px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <div class="success-icon">
+            <i class="fas fa-check checkmark"></i>
+        </div>
+
+        <h1>Case File Received! 🔍</h1>
+        <p class="subtitle">Your growth mystery is now under investigation</p>
+
+        <div class="info-box">
+            <h3>What Happens Next?</h3>
+            <ul class="next-steps">
+                <li>
+                    <i class="fas fa-search"></i>
+                    <span><strong>Within 24 hours:</strong> We'll review your business, industry, and competitors</span>
+                </li>
+                <li>
+                    <i class="fas fa-phone"></i>
+                    <span><strong>We'll call you:</strong> To discuss our preliminary findings and ask clarifying questions</span>
+                </li>
+                <li>
+                    <i class="fas fa-lightbulb"></i>
+                    <span><strong>Free insights:</strong> You'll get actionable recommendations even if you don't hire us</span>
+                </li>
+                <li>
+                    <i class="fas fa-handshake"></i>
+                    <span><strong>Custom proposal:</strong> If we're a good fit, we'll send a tailored growth strategy</span>
+                </li>
+            </ul>
+        </div>
+
+        <p style="margin-bottom: 20px; color: var(--text-muted);">
+            <strong>Need faster response?</strong> Reach out directly:
+        </p>
+
+        <div class="contact-options">
+            <a href="https://wa.me/919715940471?text=Hi%20Digizion%2C%20I%20just%20submitted%20a%20case%20file%20on%20your%20website" class="contact-card" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+                <h4>WhatsApp Now</h4>
+            </a>
+            <a href="tel:+919715940471" class="contact-card">
+                <i class="fas fa-phone"></i>
+                <h4>Call Direct</h4>
+            </a>
+            <a href="mailto:digizionmedia@gmail.com" class="contact-card">
+                <i class="fas fa-envelope"></i>
+                <h4>Email Us</h4>
+            </a>
+        </div>
+
+        <div class="cta-buttons">
+            <a href="/" class="btn btn-primary">
+                <i class="fas fa-home"></i> Back to Homepage
+            </a>
+            <a href="/#cases" class="btn btn-secondary">
+                <i class="fas fa-folder-open"></i> View Case Files
+            </a>
+        </div>
+
+        <div class="detective-badge">
+            <i class="fas fa-award"></i>
+            Your case is assigned to our detective team
+        </div>
+    </div>
+
+    <script>
+        // Track thank you page view
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'conversion', {
+                'event_category': 'Form',
+                'event_label': 'Thank You Page View'
+            });
+        }
+
+        // Confetti effect (optional)
+        setTimeout(() => {
+            console.log('🎉 Thank you for contacting Digizion Media!');
+        }, 1000);
+    </script>
+</body>
+</html>

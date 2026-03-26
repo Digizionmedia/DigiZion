@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Mystery Not Found | Digizion Media</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366F1;
+            --secondary: #EC4899;
+            --dark-bg: #0F172A;
+            --text: #FFFFFF;
+            --text-muted: #94A3B8;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .error-container {
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .magnifying-glass {
+            font-size: 120px;
+            margin-bottom: 30px;
+            animation: magnify 3s ease-in-out infinite;
+            filter: drop-shadow(0 20px 40px rgba(99, 102, 241, 0.4));
+        }
+
+        @keyframes magnify {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                transform: scale(1.1) rotate(10deg);
+            }
+        }
+
+        .error-code {
+            font-size: 120px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            animation: fadeInUp 0.6s ease 0.2s backwards;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            animation: fadeInUp 0.6s ease 0.4s backwards;
+        }
+
+        .search-box {
+            margin-bottom: 30px;
+            animation: fadeInUp 0.6s ease 0.6s backwards;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50px;
+            color: var(--text);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.6s ease 0.8s backwards;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(99, 102, 241, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .helpful-links {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeInUp 0.6s ease 1s backwards;
+        }
+
+        .helpful-links h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+        }
+
+        .link-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .link-item {
+            padding: 12px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .link-item:hover {
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateX(5px);
+        }
+
+        .link-item i {
+            margin-right: 8px;
+        }
+
+        /* Background clues */
+        .clue {
+            position: absolute;
+            font-size: 60px;
+            opacity: 0.05;
+            animation: float 8s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .clue-1 {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .clue-2 {
+            top: 20%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .clue-3 {
+            bottom: 15%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        .clue-4 {
+            bottom: 10%;
+            right: 10%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 80px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .magnifying-glass {
+                font-size: 80px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .link-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background clues -->
+    <div class="clue clue-1">🔍</div>
+    <div class="clue clue-2">📂</div>
+    <div class="clue clue-3">🎯</div>
+    <div class="clue clue-4">💡</div>
+
+    <div class="error-container">
+        <div class="magnifying-glass">🔍</div>
+        <div class="error-code">404</div>
+        <h1>Mystery Unsolved!</h1>
+        <p class="subtitle">The page you're looking for has vanished without a trace. Even our best detectives couldn't find it.</p>
+
+        <div class="search-box">
+            <input 
+                type="text" 
+                class="search-input" 
+                placeholder="Search for what you need..." 
+                id="searchInput"
+                onkeypress="if(event.key === 'Enter') window.location.href = '/#home'"
+            >
+        </div>
+
+        <div class="cta-buttons">
+            <a href="/" class="btn btn-primary">
+                <i class="fas fa-home"></i> Back to Homepage
+            </a>
+            <a href="/#contact" class="btn btn-secondary">
+                <i class="fas fa-envelope"></i> Contact Us
+            </a>
+        </div>
+
+        <div class="helpful-links">
+            <h3>Popular Pages:</h3>
+            <div class="link-grid">
+                <a href="/#services" class="link-item">
+                    <i class="fas fa-briefcase"></i> Our Services
+                </a>
+                <a href="/#cases" class="link-item">
+                    <i class="fas fa-folder-open"></i> Case Files
+                </a>
+                <a href="/#pricing" class="link-item">
+                    <i class="fas fa-tag"></i> Pricing
+                </a>
+                <a href="/#method" class="link-item">
+                    <i class="fas fa-chart-line"></i> Our Method
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Auto-focus search input
+        document.getElementById('searchInput').focus();
+
+        // Track 404 error in analytics
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_view', {
+                'page_title': '404 - Page Not Found',
+                'page_location': window.location.href,
+                'page_path': window.location.pathname
+            });
+        }
+    </script>
+</body>
+</html>

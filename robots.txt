@@ -1,7 +1,46 @@
+# Digizion Media - Marketing Detectives
+# Robots.txt Configuration
+
 User-agent: *
 Allow: /
-Sitemap: https://www.digizionmedia.in/sitemap.xml
 
-# Block admin areas (if you add any later)
+# Allow all search engines to crawl
+Allow: /index.html
+Allow: /styles.css
+Allow: /script.js
+Allow: /thank-you.html
+
+# Disallow sensitive or non-public pages
 Disallow: /admin/
 Disallow: /private/
+Disallow: /test/
+Disallow: /*.pdf$
+
+# Sitemap location
+Sitemap: https://www.digizionmedia.in/sitemap.xml
+
+# Crawl delay (optional, helps with server load)
+Crawl-delay: 1
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+# Block bad bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: SemrushBot
+Crawl-delay: 10
