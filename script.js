@@ -30,7 +30,7 @@ if (mobileMenuBtn) {
 const navLinks = document.querySelectorAll('.nav-link');
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
-        navMenu.classList.remove('menu-open');
+        navMenu.classList.remove('active');
         menuIcon.classList.remove('fa-times');
         menuIcon.classList.add('fa-bars');
     });
@@ -38,8 +38,8 @@ navLinks.forEach(link => {
 
 // Close mobile menu when clicking outside
 document.addEventListener('click', (e) => {
-    if (!e.target.closest('.nav-wrapper') && navMenu.classList.contains('menu-open')) {
-        navMenu.classList.remove('menu-open');
+    if (!e.target.closest('.nav-wrapper') && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
         menuIcon.classList.remove('fa-times');
         menuIcon.classList.add('fa-bars');
     }
