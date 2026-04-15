@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Restaurant Digital Marketing Coimbatore | Food Business Growth Expert | Digizion Media</title>
+    <meta name="description" content="Best restaurant digital marketing agency in Coimbatore. Increase footfall, boost online orders & grow your food business with our proven strategies. Google Ads, SEO, Social Media for restaurants. ₹20,000/month.">
+    <meta name="keywords" content="restaurant marketing coimbatore, food business marketing coimbatore, restaurant social media marketing, online food ordering promotion, restaurant SEO coimbatore, cafe marketing coimbatore, cloud kitchen marketing">
+    
+    <!-- Location Tags -->
+    <meta name="geo.region" content="IN-TN">
+    <meta name="geo.placename" content="Coimbatore">
+    <meta name="geo.position" content="11.0168;76.9558">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Restaurant Marketing Agency Coimbatore | Digizion Media">
+    <meta property="og:description" content="Grow your restaurant business in Coimbatore with expert digital marketing. SEO, Ads, Social Media. ₹20K/month.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.digizionmedia.in/restaurant-marketing.html">
+    
+    <link rel="canonical" href="https://www.digizionmedia.in/restaurant-marketing.html">
+    
+    <!-- Fonts & Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Restaurant Digital Marketing Services Coimbatore",
+      "provider": {
+        "@type": "ProfessionalService",
+        "name": "Digizion Media",
+        "telephone": "+919715940471",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Coimbatore",
+          "addressRegion": "Tamil Nadu"
+        }
+      },
+      "areaServed": "Coimbatore",
+      "serviceType": "Digital Marketing for Restaurants",
+      "offers": {
+        "@type": "Offer",
+        "price": "20000",
+        "priceCurrency": "INR"
+      }
+    }
+    </script>
+</head>
+<body>
+
+    <!-- Navigation (same as homepage) -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <i class="fas fa-search detective-icon"></i>
+                    <a href="/"><h2>Digizion<span class="accent-dot">.</span></h2></a>
+                </div>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="/" class="nav-link">Home</a></li>
+                    <li class="dropdown active">
+                        <a href="/#services" class="nav-link dropdown-toggle">
+                            Services <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/restaurant-marketing.html" class="active">Restaurant Marketing</a></li>
+                            <li><a href="/retail-marketing.html">Retail & E-commerce</a></li>
+                            <li><a href="/real-estate-marketing.html">Real Estate</a></li>
+                            <li><a href="/healthcare-marketing.html">Healthcare</a></li>
+                            <li><a href="/education-marketing.html">Education</a></li>
+                            <li><a href="/manufacturing-marketing.html">Manufacturing</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/#method" class="nav-link">Our Method</a></li>
+                    <li><a href="/#cases" class="nav-link">Case Files</a></li>
+                    <li><a href="/#contact" class="nav-btn">Get Started</a></li>
+                </ul>
+                
+                <button class="mobile-menu-toggle" id="mobileMenuBtn">
+                    <i class="fas fa-bars" id="menuIcon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="service-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="/">Home</a> <i class="fas fa-chevron-right"></i> 
+                <a href="/#services">Services</a> <i class="fas fa-chevron-right"></i> 
+                <span>Restaurant Marketing</span>
+            </div>
+            
+            <h1>Restaurant Digital Marketing Agency in Coimbatore</h1>
+            <p class="hero-subtitle">Fill Tables, Boost Orders & Build a Loyal Customer Base</p>
+            
+            <div class="industry-stats">
+                <div class="stat-card">
+                    <div class="stat-number">3.5x</div>
+                    <div class="stat-label">Avg. Footfall Increase</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">420%</div>
+                    <div class="stat-label">Online Order Growth</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">₹20K</div>
+                    <div class="stat-label">Starting From/Month</div>
+                </div>
+            </div>
+            
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-calendar"></i> Book Free Strategy Call
+                </a>
+                <a href="#case-studies" class="btn btn-secondary">
+                    <i class="fas fa-chart-line"></i> See Restaurant Results
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="industry-problems">
+        <div class="container">
+            <h2>Common Challenges for Restaurants in Coimbatore</h2>
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <i class="fas fa-users-slash"></i>
+                    <h3>Empty Tables During Off-Peak Hours</h3>
+                    <p>Struggling to maintain consistent footfall throughout the day</p>
+                </div>
+                <div class="problem-card">
+                    <i class="fas fa-store-slash"></i>
+                    <h3>High Competition in Food Delivery</h3>
+                    <p>Getting lost among hundreds of restaurants on Swiggy/Zomato</p>
+                </div>
+                <div class="problem-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>No Online Presence</h3>
+                    <p>Customers can't find you on Google or social media</p>
+                </div>
+                <div class="problem-card">
+                    <i class="fas fa-star-half-alt"></i>
+                    <h3>Poor Online Reviews</h3>
+                    <p>Bad reviews hurting your reputation and new customer acquisition</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section class="industry-solutions">
+        <div class="container">
+            <h2>Our Restaurant Marketing Solutions</h2>
+            <p class="section-subtitle">Proven strategies specifically designed for Coimbatore's food & beverage industry</p>
+            
+            <div class="solutions-grid">
+                <div class="solution-card">
+                    <div class="solution-icon">🍽️</div>
+                    <h3>Local SEO for Restaurants</h3>
+                    <p>Rank #1 when people search "restaurants near me" or "best biryani in Coimbatore"</p>
+                    <ul>
+                        <li>Google Business Profile optimization</li>
+                        <li>Local keyword targeting</li>
+                        <li>Google Maps dominance</li>
+                        <li>Review management</li>
+                    </ul>
+                </div>
+
+                <div class="solution-card">
+                    <div class="solution-icon">📱</div>
+                    <h3>Social Media Marketing</h3>
+                    <p>Build a drool-worthy Instagram & Facebook presence that attracts customers</p>
+                    <ul>
+                        <li>Food photography & videography</li>
+                        <li>Instagram Reels & Stories</li>
+                        <li>Influencer collaborations</li>
+                        <li>User-generated content campaigns</li>
+                    </ul>
+                </div>
+
+                <div class="solution-card">
+                    <div class="solution-icon">🎯</div>
+                    <h3>Google & Facebook Ads</h3>
+                    <p>Target hungry customers within 5km radius with irresistible offers</p>
+                    <ul>
+                        <li>Geo-targeted ad campaigns</li>
+                        <li>Special offers & promotions</li>
+                        <li>Retargeting past visitors</li>
+                        <li>ROI-focused campaigns</li>
+                    </ul>
+                </div>
+
+                <div class="solution-card">
+                    <div class="solution-icon">🚀</div>
+                    <h3>Online Ordering Optimization</h3>
+                    <p>Boost Swiggy & Zomato rankings and increase direct online orders</p>
+                    <ul>
+                        <li>Menu optimization</li>
+                        <li>Delivery platform SEO</li>
+                        <li>Own website ordering system</li>
+                        <li>WhatsApp ordering setup</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ideal For Section -->
+    <section class="ideal-for">
+        <div class="container">
+            <h2>Perfect For:</h2>
+            <div class="ideal-grid">
+                <div class="ideal-item"><i class="fas fa-check-circle"></i> Fine Dining Restaurants</div>
+                <div class="ideal-item"><i class="fas fa-check-circle"></i> Quick Service Restaurants (QSR)</div>
+                <div class="ideal-item"><i class="fas fa-check-circle"></i> Cafes & Bakeries</div>
+                <div class="ideal-item"><i class="fas fa-check-circle"></i> Cloud Kitchens</div>
+                <div class="ideal-item"><i class="fas fa-check-circle"></i> Food Trucks</div>
+                <div class="ideal-item"><i class="fas fa-check-circle"></i> Multi-Cuisine Restaurants</div>
+                <div class="ideal-item"><i class="fas fa-check-circle"></i> Specialty Food Brands</div>
+                <div class="ideal-item"><i class="fas fa-check-circle"></i> Catering Services</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <h2>Ready to Fill Your Restaurant Every Day?</h2>
+            <p>Let's create a custom marketing strategy for your Coimbatore restaurant</p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/919715940471?text=Hi, I want marketing for my restaurant in Coimbatore" class="btn btn-primary">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Us Now
+                </a>
+                <a href="tel:+919715940471" class="btn btn-secondary">
+                    <i class="fas fa-phone"></i> Call: +91 97159 40471
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Digizion Media - Restaurant Marketing Specialists Coimbatore</p>
+            <p><a href="/">Home</a> | <a href="/#services">All Services</a> | <a href="/#contact">Contact</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

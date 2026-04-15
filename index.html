@@ -104,31 +104,43 @@
 
 <body>
 
-    <!-- NAVIGATION -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <div class="logo">
-                    <i class="fas fa-search detective-icon"></i>
-                    <h2>Digizion<span class="accent-dot">.</span></h2>
-                </div>
-
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="#home" class="nav-link">Home</a></li>
-                    <li><a href="#method" class="nav-link">Our Method</a></li>
-                    <li><a href="#services" class="nav-link">Services</a></li>
-                    <li><a href="#cases" class="nav-link">Case Files</a></li>
-                    <li><a href="#pricing" class="nav-link">Pricing</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                    <li><a href="#contact" class="nav-btn">Solve My Mystery</a></li>
-                </ul>
-
-                <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle menu">
-                    <i class="fas fa-bars" id="menuIcon"></i>
-                </button>
+    <!-- UPDATED NAVIGATION WITH DROPDOWN - Replace nav section in index.html -->
+<nav class="navbar">
+    <div class="container">
+        <div class="nav-wrapper">
+            <div class="logo">
+                <i class="fas fa-search detective-icon"></i>
+                <h2>Digizion<span class="accent-dot">.</span></h2>
             </div>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li class="dropdown">
+                    <a href="#services" class="nav-link dropdown-toggle">
+                        Services <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/restaurant-marketing.html">Restaurant Marketing</a></li>
+                        <li><a href="/retail-marketing.html">Retail & E-commerce</a></li>
+                        <li><a href="/real-estate-marketing.html">Real Estate Marketing</a></li>
+                        <li><a href="/healthcare-marketing.html">Healthcare Marketing</a></li>
+                        <li><a href="/education-marketing.html">Education Marketing</a></li>
+                        <li><a href="/manufacturing-marketing.html">Manufacturing Marketing</a></li>
+                    </ul>
+                </li>
+                <li><a href="/#method" class="nav-link">Our Method</a></li>
+                <li><a href="/#cases" class="nav-link">Case Files</a></li>
+                <li><a href="/#pricing" class="nav-link">Pricing</a></li>
+                <li><a href="/#contact" class="nav-link">Contact</a></li>
+                <li><a href="/#contact" class="nav-btn">Solve My Mystery</a></li>
+            </ul>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle menu">
+                <i class="fas fa-bars" id="menuIcon"></i>
+            </button>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <!-- HERO SECTION -->
     <section id="home" class="hero">
